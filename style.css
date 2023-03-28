@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+* {
+  user-select: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+ul {
+  list-style-type: none;
+}
+:root {
+  --blue: hsl(240, 100%, 78%);
+  --pink: pink;
+  --black: black;
+  --white: white;
+  --gray: #eee;
+  --darkGray: #ccc;
+}
+body {
+  min-height: 100vh;
+  background-image: linear-gradient(to right, var(--blue), var(--pink));
+  display: flex;
+  justify-content: center;
+  padding-block: 50px;
+}
+.container {
+  width: 90%;
+  background-color: var(--white);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  max-width: 400px;
+  overflow: hidden;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.wrapper {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+/* .calendar-header */
+.calendar-header {
+  background-color: var(--blue);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0.8rem 1.5rem 1.5rem;
+  color: var(--white);
+  font-weight: 600;
+  border-radius: 0.7rem;
+  margin-bottom: 1rem;
+}
+.calendar-header .month {
+  text-transform: capitalize;
+  cursor: pointer;
+}
+.calendar-header .year-picker {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  justify-content: space-between;
+}
+.year-picker span:not(:nth-child(2)) {
+  width: 28px;
+  height: 28px;
+  text-align: center;
+  line-height: 28px;
+  cursor: pointer;
+}
+
+.year-picker .year {
+  line-height: 1;
+}
+/* calendar */
+.calendar-body {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+.weeks {
+  display: flex;
+}
+.weeks li {
+  width: calc(100% / 7);
+  text-align: center;
+  color: var(--black);
+  font-weight: 500;
+  font-size: 0.85rem;
+  font-size: clamp(0.85rem, 1.5vw + 0.5rem, 1rem);
+  text-transform: capitalize;
+  padding-block: 0.77rem;
+}
+.days {
+  display: flex;
+  flex-wrap: wrap;
+}
+.days li {
+  width: calc(100% / 7);
+  text-align: center;
+  padding-block: 0.77rem;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.days li::before {
+  content: "";
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  z-index: -1;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transition: all 0.2s ease-in-out;
+  transform: translate(-50%, -50%);
+}
+.days li:hover::before {
+  background-color: var(--pink);
+}
+.days li.inactive {
+  color: var(--darkGray);
+}
+.days li.inactive:hover {
+  color: var(--white);
+}
+.days li.active {
+  color: var(--white);
+}
+.days li.active::before {
+  background-color: var(--blue);
+}
+/* calendar description */
+.calendar-footer {
+  overflow: hidden;
+  position: relative;
+  margin-top: auto;
+}
+.calendar-footer .today {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-block: 2rem;
+  width: 100%;
+}
+
+.today .day {
+  text-transform: uppercase;
+  font-weight: 500;
+  border-bottom: 2px solid var(--black);
+  line-height: 1;
+  width: 50%;
+  text-align: center;
+  font-size: 1.5rem;
+  padding-bottom: 0.3rem;
+  margin-bottom: 0.8rem;
+}
+
+.today .time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-transform: capitalize;
+}
+.today .clock {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+.today .date {
+  font-size: 0.8rem;
+}
+
+.calendar-footer .months {
+  width: 100%;
+  background-color: var(--gray);
+  border-radius: 0.7rem;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  transition: all 0.4s ease-in-out;
+  overflow: hidden;
+}
+.display-months {
+  transform: translateX(-100%);
+}
+.months ul {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.months ul li {
+  width: calc(100% / 3);
+  text-align: center;
+  padding-block: 0.42rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.months ul li:hover {
+  background-color: var(--blue);
+  color: var(--white);
+}
+@media screen and (min-width: 350px) {
+  .calendar-header .year-picker {
+    width: 40%;
+  }
+}
+@media screen and (min-width: 420px) {
+  .calendar-footer .today {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-inline: 1rem;
+  }
+  .today .day {
+    border-bottom: 0;
+    border-right: 2px solid var(--black);
+    padding-bottom: 0;
+    margin-bottom: 0;
+    width: auto;
+    padding-inline: 0.5rem 1rem;
+  }
+  .months ul li {
+    padding-block: 0.11rem;
+  }
+  .calendar-header .year-picker {
+    width: 35%;
+  }
+}
